@@ -2,13 +2,6 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
-const MedicalCrossIcon = ({ size = 24, color = "#00e676" }: { size?: number; color?: string }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-    <rect x="9.5" y="2" width="5" height="20" rx="2.5" fill={color}/>
-    <rect x="2" y="9.5" width="20" height="5" rx="2.5" fill={color}/>
-  </svg>
-);
-
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -20,38 +13,45 @@ export default function Navbar() {
   }, []);
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-      scrolled
-        ? "bg-[#060a06]/85 backdrop-blur-xl border-b border-white/[0.06]"
-        : "bg-transparent"
-    }`}>
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        scrolled
+          ? "bg-[#060a06]/85 backdrop-blur-xl border-b border-white/[0.06]"
+          : "bg-transparent"
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
 
-        {/* Logo — Full Wordmark */}
+        {/* Logo */}
         <Link href="/" className="flex items-center gap-3 group">
+          
           {/* Icon */}
-          <div className="w-9 h-9 rounded-[10px] flex items-center justify-center"
-            style={{
-              background: "linear-gradient(135deg, rgba(0,230,118,0.15), rgba(0,188,212,0.08))",
-              border: "1px solid rgba(0,230,118,0.25)"
-            }}>
-            <MedicalCrossIcon size={18} color="#00e676" />
+          <div className="w-[38px] h-[38px] rounded-[11px] flex items-center justify-center 
+            bg-gradient-to-br from-[#00E676]/10 to-[#00BCD4]/10 
+            border border-[#00E676]/25 
+            shadow-[0_0_16px_rgba(0,230,118,0.15)]">
+
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <defs>
+                <linearGradient id="plusGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stopColor="#00E676" />
+                  <stop offset="100%" stopColor="#00BCD4" />
+                </linearGradient>
+              </defs>
+              <rect x="8.5" y="1" width="3" height="18" rx="1.5" fill="url(#plusGrad)" />
+              <rect x="1" y="8.5" width="18" height="3" rx="1.5" fill="url(#plusGrad)" />
+            </svg>
           </div>
 
           {/* Text */}
-          <div className="flex flex-col gap-0">
-            <span className="text-[18px] font-black leading-none tracking-tight text-white"
-              style={{ letterSpacing: "-0.03em" }}>
-              MyCare
-              <span style={{
-                background: "linear-gradient(135deg, #00e676, #00bcd4)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text"
-              }}>+</span>
+          <div className="flex flex-col gap-[1px]">
+            <span className="text-[18px] font-black leading-none tracking-tight flex items-baseline gap-1">
+              <span className="text-white">MyCare</span>
+              <span className="bg-gradient-to-r from-[#00E676] to-[#00BCD4] bg-clip-text text-transparent">
+                +
+              </span>
             </span>
-            <span className="text-[8px] tracking-[0.18em] uppercase font-semibold"
-              style={{ color: "#3a6a3a" }}>
+            <span className="text-[8px] tracking-[0.18em] uppercase font-semibold text-[#2a5a2a]">
               Medical Assistant
             </span>
           </div>
@@ -60,11 +60,11 @@ export default function Navbar() {
         {/* Desktop Nav Links */}
         <div className="hidden md:flex items-center gap-8">
           {["Home", "Features", "Doctors", "About"].map((item) => (
-            <Link key={item} href={`#${item.toLowerCase()}`}
-              className="text-[11px] font-semibold tracking-wide transition-colors duration-300"
-              style={{ color: "#3a5a3a", letterSpacing: "0.04em" }}
-              onMouseEnter={e => (e.currentTarget.style.color = "#00e676")}
-              onMouseLeave={e => (e.currentTarget.style.color = "#3a5a3a")}>
+            <Link
+              key={item}
+              href={`#${item.toLowerCase()}`}
+              className="text-[11px] font-semibold tracking-wide text-[#3a5a3a] hover:text-[#00E676] transition-colors duration-300"
+            >
               {item}
             </Link>
           ))}
@@ -72,61 +72,71 @@ export default function Navbar() {
 
         {/* Buttons */}
         <div className="hidden md:flex items-center gap-2">
-          <Link href="/login"
-            className="px-4 py-2 text-[11px] font-bold rounded-lg transition-all duration-300"
-            style={{
-              border: "1px solid rgba(0,230,118,0.22)",
-              color: "#00e676",
-              background: "transparent"
-            }}>
+          <Link
+            href="/login"
+            className="px-4 py-2 text-[11px] font-bold rounded-lg border border-[#00E676]/20 text-[#00E676] hover:bg-[#00E676]/10 transition-all duration-300"
+          >
             Login
           </Link>
-          <Link href="/register"
-            className="px-4 py-2 text-[11px] font-black rounded-lg transition-all duration-300"
-            style={{
-              background: "linear-gradient(135deg, #00e676, #00c853)",
-              color: "#000",
-              boxShadow: "0 4px 16px rgba(0,230,118,0.2)"
-            }}>
+
+          <Link
+            href="/register"
+            className="px-4 py-2 text-[11px] font-black rounded-lg bg-gradient-to-r from-[#00E676] to-[#00C853] text-black shadow-[0_4px_16px_rgba(0,230,118,0.2)] hover:shadow-[0_0_20px_#00E676] transition-all duration-300"
+          >
             Get Started
           </Link>
         </div>
 
         {/* Mobile Menu Button */}
-        <button className="md:hidden flex flex-col gap-1.5 p-1"
-          onClick={() => setMenuOpen(!menuOpen)}>
-          <span className={`block w-5 h-0.5 transition-all duration-300 ${menuOpen ? "rotate-45 translate-y-2" : ""}`}
-            style={{ background: "#00e676" }}/>
-          <span className={`block w-5 h-0.5 transition-all duration-300 ${menuOpen ? "opacity-0" : ""}`}
-            style={{ background: "#00e676" }}/>
-          <span className={`block w-5 h-0.5 transition-all duration-300 ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`}
-            style={{ background: "#00e676" }}/>
+        <button
+          className="md:hidden flex flex-col gap-1.5 p-1"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          <span
+            className={`block w-5 h-0.5 transition-all duration-300 ${
+              menuOpen ? "rotate-45 translate-y-2" : ""
+            } bg-[#00E676]`}
+          />
+          <span
+            className={`block w-5 h-0.5 transition-all duration-300 ${
+              menuOpen ? "opacity-0" : ""
+            } bg-[#00E676]`}
+          />
+          <span
+            className={`block w-5 h-0.5 transition-all duration-300 ${
+              menuOpen ? "-rotate-45 -translate-y-2" : ""
+            } bg-[#00E676]`}
+          />
         </button>
       </div>
 
       {/* Mobile Menu */}
       {menuOpen && (
-        <div className="md:hidden px-6 py-5 flex flex-col gap-4"
-          style={{
-            background: "rgba(6,10,6,0.95)",
-            backdropFilter: "blur(20px)",
-            borderTop: "1px solid rgba(255,255,255,0.05)"
-          }}>
+        <div className="md:hidden px-6 py-5 flex flex-col gap-4 bg-[#060a06]/95 backdrop-blur-xl border-t border-white/[0.05]">
+          
           {["Home", "Features", "Doctors", "About"].map((item) => (
-            <Link key={item} href={`#${item.toLowerCase()}`}
-              className="text-sm font-medium transition-colors"
-              style={{ color: "#3a5a3a" }}
-              onClick={() => setMenuOpen(false)}>
+            <Link
+              key={item}
+              href={`#${item.toLowerCase()}`}
+              className="text-sm font-medium text-[#3a5a3a] hover:text-[#00E676] transition-colors"
+              onClick={() => setMenuOpen(false)}
+            >
               {item}
             </Link>
           ))}
+
           <div className="flex gap-3 pt-2">
-            <Link href="/login" className="flex-1 text-center py-2.5 text-xs font-bold rounded-lg"
-              style={{ border: "1px solid rgba(0,230,118,0.22)", color: "#00e676" }}>
+            <Link
+              href="/login"
+              className="flex-1 text-center py-2.5 text-xs font-bold rounded-lg border border-[#00E676]/20 text-[#00E676]"
+            >
               Login
             </Link>
-            <Link href="/register" className="flex-1 text-center py-2.5 text-xs font-black rounded-lg"
-              style={{ background: "linear-gradient(135deg, #00e676, #00c853)", color: "#000" }}>
+
+            <Link
+              href="/register"
+              className="flex-1 text-center py-2.5 text-xs font-black rounded-lg bg-gradient-to-r from-[#00E676] to-[#00C853] text-black"
+            >
               Get Started
             </Link>
           </div>
