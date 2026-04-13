@@ -424,9 +424,14 @@ export default function RegisterPage() {
                     label="GOVERNMENT ID PROOF"
                     icon={IconId}
                     file={govIdFile}
-                    onChange={setGovIdFile}
+                    onChange={(file) => {
+                      if (file.size > 200 * 1024) {alert("File size must be under 200KB! Please compress your file.");
+                         return;
+                        }
+                         setGovIdFile(file);
+                        }}
                     accept="image/*,.pdf"
-                    hint="JPG, PNG or PDF — Max 5MB"
+                    hint="JPG or PDF — Max 200 KB"
                   />
 
                   {/* Upload Certificate */}
@@ -434,7 +439,13 @@ export default function RegisterPage() {
                     label="MEDICAL CERTIFICATE / DEGREE"
                     icon={IconCertificate}
                     file={certFile}
-                    onChange={setCertFile}
+                    onChange={(file) => {
+                      if (file.size > 200 * 1024) {
+                      alert("File size must be under 200KB! Please compress your file.");
+                      return;
+                    }
+                    setCertFile(file);
+                  }}
                     accept="image/*,.pdf"
                     hint="Medical degree or registration certificate"
                   />
